@@ -3,7 +3,7 @@ import numpy as np
 
 class Dardo:
     def __init__(self):
-        self.sprite_original = pygame.transform.scale(pygame.image.load("pygame_alglin\img\dardo.png"),(120,40))
+        self.sprite_original = pygame.transform.scale(pygame.image.load("pygame_alglin\img\dardo.png"),(150,200))
         self.sprite = self.sprite_original
         self.s0 = np.array([20,550])
         self.s = self.s0

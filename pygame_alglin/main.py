@@ -1,7 +1,9 @@
 import pygame
 from ClassDardo import *
+from ClassCorpo import *
+from ClassCenario import *
 class Game:
-    def __init__(self, width=800, height=700):
+    def __init__(self, width=1200, height=700):
 
         pygame.init()
         self.screen = pygame.display.set_mode((width, height))
@@ -12,6 +14,8 @@ class Game:
         self.vf = np.array([10,-15])
         self.forca = 90
         self.dardo.v = self.dardo.normaliza(self.vf,self.forca)
+        self.corpo = Corpo()
+        self.cenario = Cenario()
         
     def run(self):
        
@@ -20,6 +24,7 @@ class Game:
             self.update()         
             self.draw()           
             self.clock.tick(60)
+            print(pygame.mouse.get_pos())
 
     def handle_events(self):
         
@@ -29,11 +34,12 @@ class Game:
 
     def update(self):
         self.dardo.atualiza_vetor()
-        
+        self.corpo.gera_pos()
 
     def draw(self):
-        self.screen.fill((0, 0, 0))
+        self.screen.fill((255, 255, 255))
         self.dardo.desenha_dardo(self.screen)
+        self.corpo.desenha_corpo(self.screen)
         pygame.display.update()
 
     def quit(self):
