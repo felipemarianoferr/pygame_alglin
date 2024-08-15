@@ -16,6 +16,7 @@ class Game:
         self.dardo.v = self.dardo.normaliza(self.vf,self.forca)
         self.corpo = Corpo()
         self.cenario = Cenario()
+        self.event = None
         
     def run(self):
        
@@ -24,21 +25,23 @@ class Game:
             self.update()         
             self.draw()           
             self.clock.tick(60)
-            print(pygame.mouse.get_pos())
 
     def handle_events(self):
-        
         for event in pygame.event.get():
+            self.event = event
             if event.type == pygame.QUIT:
                 self.running = False
+            else:
+                self.dardo.puxa_dardo(event)
 
     def update(self):
+        self.dardo.puxa_dardo(self.event)
         self.dardo.atualiza_vetor()
         self.corpo.gera_pos()
 
     def draw(self):
         self.screen.fill((255, 255, 255))
-        self.dardo.desenha_dardo(self.screen)
+        self.dardo.desenha_dardo(self.screen, self.event)
         self.corpo.desenha_corpo(self.screen)
         pygame.display.update()
 
