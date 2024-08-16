@@ -15,6 +15,8 @@ class Dardo:
         self.arrastando = False
         self.qtd_bolinhas = 50
         self.distancia_final_max = 400
+        self.vetor = np.array([0, 0], dtype=np.float64)
+        self.iman = pygame.Rect((500,0), (100, 200))
 
     def normaliza(self, vf, forca):
         mod = np.linalg.norm(vf)
@@ -64,7 +66,12 @@ class Dardo:
         return pontos
 
     def atualiza_vetor(self, vet_grav):
+
         if not self.puxando:
+            if self.rect.colliderect(self.iman):
+                self.gravidade = np.array([0, -3])
+            else:
+                self.gravidade = np.array([0, 0.8])
 
             self.v += self.gravidade + vet_grav
             self.s += 0.1 * self.v
@@ -75,9 +82,9 @@ class Dardo:
             self.rect = self.sprite.get_rect(center=self.rect.center)
     
     def desenha_dardo(self, window, evento):
+        pygame.draw.rect(window, (255,255,0), self.iman)
         pos_centralizada = self.s - np.array([self.sprite.get_width() / 2, self.sprite.get_height() / 2])
         window.blit(self.sprite, pos_centralizada)
-
         if self.arrastando:
             bolas_tamanho = 7
             pontos = self.calcular_trajetoria(evento)
