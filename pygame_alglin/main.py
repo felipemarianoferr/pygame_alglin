@@ -42,7 +42,6 @@ class Game:
         vet_grav = self.iman.atualiza_aceleracao(self.dardo.s)
         self.dardo.atualiza_vetor(vet_grav)
         self.corpo.gera_pos()
-        print(vet_grav)
 
     def draw(self):
         self.screen.fill((255, 255, 255))
