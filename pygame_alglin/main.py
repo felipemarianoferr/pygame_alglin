@@ -2,6 +2,7 @@ import pygame
 from ClassDardo import *
 from ClassCorpo import *
 from ClassCenario import *
+from ClassGravidade import *
 class Game:
     def __init__(self, width=1200, height=700):
 
@@ -17,6 +18,7 @@ class Game:
         self.corpo = Corpo()
         self.cenario = Cenario()
         self.event = None
+        self.iman = Iman()
         
     def run(self):
        
@@ -25,6 +27,7 @@ class Game:
             self.update()         
             self.draw()           
             self.clock.tick(60)
+            
 
     def handle_events(self):
         for event in pygame.event.get():
@@ -36,11 +39,14 @@ class Game:
 
     def update(self):
         self.dardo.puxa_dardo(self.event)
-        self.dardo.atualiza_vetor()
+        vet_grav = self.iman.atualiza_aceleracao(self.dardo.s)
+        self.dardo.atualiza_vetor(vet_grav)
         self.corpo.gera_pos()
+        print(vet_grav)
 
     def draw(self):
         self.screen.fill((255, 255, 255))
+        self.iman.desenha_corpo(self.screen)
         self.dardo.desenha_dardo(self.screen, self.event)
         self.corpo.desenha_corpo(self.screen)
         pygame.display.update()

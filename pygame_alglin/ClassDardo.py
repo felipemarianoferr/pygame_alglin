@@ -63,9 +63,10 @@ class Dardo:
 
         return pontos
 
-    def atualiza_vetor(self):
+    def atualiza_vetor(self, vet_grav):
         if not self.puxando:
-            self.v += self.gravidade
+
+            self.v += self.gravidade + vet_grav
             self.s += 0.1 * self.v
 
             self.rect.topleft = self.s  
