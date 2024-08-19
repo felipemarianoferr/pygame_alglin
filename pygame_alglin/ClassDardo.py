@@ -82,6 +82,17 @@ class Dardo:
             self.rect = self.sprite.get_rect(center=self.rect.center)
     
     def desenha_dardo(self, window, evento):
+
+        # if self.s[0] == 150 and self.s[1] == 550:
+        #     if evento.type == pygame.MOUSEBUTTONDOWN:
+        #         vet_mouse = pygame.mouse.get_pos()
+        #         vet_mouse = np.array([vet_mouse[0], vet_mouse[1]])
+
+        #         angulo_inicial = self.angulo(vet_mouse)
+        #         self.sprite = pygame.transform.rotate(self.sprite_original, angulo_inicial)
+        #         self.rect = self.sprite.get_rect(center=self.rect.center)
+        #         print("entrou")
+
         pygame.draw.rect(window, (255,255,0), self.iman)
         pos_centralizada = self.s - np.array([self.sprite.get_width() / 2, self.sprite.get_height() / 2])
         window.blit(self.sprite, pos_centralizada)

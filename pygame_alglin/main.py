@@ -26,8 +26,7 @@ class Game:
             self.handle_events()  
             self.update()         
             self.draw()           
-            self.clock.tick(60)
-            
+            self.clock.tick(60) 
 
     def handle_events(self):
         for event in pygame.event.get():
@@ -42,7 +41,6 @@ class Game:
         vet_grav = self.iman.atualiza_aceleracao(self.dardo.s)
         self.dardo.atualiza_vetor(vet_grav)
         self.corpo.gera_pos()
-        print(vet_grav)
 
     def draw(self):
         self.screen.fill((255, 255, 255))
