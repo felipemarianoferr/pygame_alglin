@@ -10,18 +10,24 @@ class Dardo:
         self.v = np.array([0, 0], dtype=np.float64)
         self.controle_intensidade = 0.75
         self.gravidade = np.array([0, 0.8], dtype=np.float64)
-        self.rect = pygame.Rect(self.s, (10, 10))
+        self.rect = pygame.Rect(self.s, (40, 40))
         self.puxando = True
         self.arrastando = False
         self.qtd_bolinhas = 50
         self.distancia_final_max = 400
         self.vetor = np.array([0, 0], dtype=np.float64)
+        self.iman = pygame.Rect((500,0), (100, 200))
+        self.rect_colisao = pygame.Rect(self.s[0], self.s[1], 40, 15)
 
     def normaliza(self, vf, forca):
         mod = np.linalg.norm(vf)
         a = forca / mod if mod != 0 else 0
         v_norm = a * vf
         return v_norm
+
+    def atualiza_colisao(self):
+        self.rect_colisao = pygame.Rect(self.s[0]+30, self.s[1]-15, 30, 30)
+
 
     def restringir_posicao(self, pos):
         x, y = pos
@@ -65,7 +71,12 @@ class Dardo:
         return pontos
 
     def atualiza_vetor(self, vet_grav):
+
         if not self.puxando:
+            if self.rect.colliderect(self.iman):
+                self.gravidade = np.array([0, -3])
+            else:
+                self.gravidade = np.array([0, 0.8])
 
             self.v += self.gravidade + vet_grav
             self.s += 0.1 * self.v
@@ -76,9 +87,20 @@ class Dardo:
             self.rect = self.sprite.get_rect(center=self.rect.center)
     
     def desenha_dardo(self, window, evento):
+        #pygame.draw.rect(window,(255,250,0),self.rect_colisao)
+        # if self.s[0] == 150 and self.s[1] == 550:
+        #     if evento.type == pygame.MOUSEBUTTONDOWN:
+        #         vet_mouse = pygame.mouse.get_pos()
+        #         vet_mouse = np.array([vet_mouse[0], vet_mouse[1]])
+
+        #         angulo_inicial = self.angulo(vet_mouse)
+        #         self.sprite = pygame.transform.rotate(self.sprite_original, angulo_inicial)
+        #         self.rect = self.sprite.get_rect(center=self.rect.center)
+        #         print("entrou")
+
+        pygame.draw.rect(window, (255,255,0), self.iman)
         pos_centralizada = self.s - np.array([self.sprite.get_width() / 2, self.sprite.get_height() / 2])
         window.blit(self.sprite, pos_centralizada)
-
         if self.arrastando:
             bolas_tamanho = 7
             pontos = self.calcular_trajetoria(evento)

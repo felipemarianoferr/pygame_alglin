@@ -3,7 +3,7 @@ import numpy as np
 
 class Iman:
     def __init__(self):
-        self.centro = np.array([545,259])
+        self.centro = np.array([545,559])
         self.raio = 100
         self.sprite = pygame.transform.scale(pygame.image.load("pygame_alglin/img/iman.png"), (200, 200))
 
@@ -22,5 +22,4 @@ class Iman:
         return (1/self.dist(s_obj)**2)*v_norm*self.raio*10
     
     def desenha_corpo(self, window):
-        #pygame.draw.circle(window, (0, 0, 255), self.centro, self.raio)
-        window.blit(self.sprite, [445,159])
+        pygame.draw.circle(window, (0, 0, 255), self.centro, self.raio)
