@@ -124,6 +124,6 @@ class Dardo:
             self.arrastando = False
             self.puxando = False
             
-            vetor = np.array([bola_inicial_x - posicao[0], 
+            self.vetor = np.array([bola_inicial_x - posicao[0], 
                               bola_inicial_y - posicao[1]], dtype=np.float64)
-            self.v = self.normaliza(vetor, np.linalg.norm(vetor)) * self.controle_intensidade
+            self.v = self.normaliza(self.vetor, np.linalg.norm(self.vetor)) * self.controle_intensidade
