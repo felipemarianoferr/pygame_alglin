@@ -26,7 +26,21 @@ class Game:
             self.handle_events()  
             self.update()         
             self.draw()           
-            self.clock.tick(60) 
+            self.clock.tick(60)
+
+            if self.corpo.desenha1:
+                if self.dardo.rect_colisao.colliderect(self.corpo.rect_colisao_corpo1):
+                    self.dardo = Dardo()
+                    self.corpo.desenha1 = False
+                    self.corpo.desenha2 = True
+            elif self.corpo.desenha2:
+                if self.dardo.rect_colisao.colliderect(self.corpo.rect_colisao_corpo2):
+                    self.dardo = Dardo()
+                    self.corpo.desenha2 = False
+                    self.corpo.desenha3 = True
+            elif self.corpo.desenha3:
+                if self.dardo.rect_colisao.colliderect(self.corpo.rect_colisao_corpo3):
+                    self.running = False
 
     def handle_events(self):
         for event in pygame.event.get():
@@ -37,6 +51,8 @@ class Game:
                 self.dardo.puxa_dardo(event)
 
     def update(self):
+        self.dardo.atualiza_colisao()
+        self.corpo.atuliza_coli()
         self.dardo.puxa_dardo(self.event)
         vet_grav = self.iman.atualiza_aceleracao(self.dardo.s)
         self.dardo.atualiza_vetor(vet_grav)

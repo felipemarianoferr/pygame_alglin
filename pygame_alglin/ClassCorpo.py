@@ -23,6 +23,9 @@ class Corpo():
         self.sobe = False
         self.desce = True
         self.gravidade = np.array([0, 0.8], dtype=np.float64)
+        self.rect_colisao_corpo1 = pygame.Rect(self.rect.topleft[0], self.rect.topleft[1], 40, 15)
+        self.rect_colisao_corpo2 = pygame.Rect(self.rect2.topleft[0], self.rect2.topleft[1], 40, 15)
+        self.rect_colisao_corpo3 = pygame.Rect(self.rect3.topleft[0], self.rect3.topleft[1], 40, 15)
 
 
     def normaliza(self, vf, forca):
@@ -30,6 +33,14 @@ class Corpo():
         a = forca / mod if mod != 0 else 0
         v_norm = a * vf
         return v_norm
+    
+    def atuliza_coli(self):
+        if self.desenha1:
+            self.rect_colisao_corpo1 = pygame.Rect(self.rect.topleft[0]+65, self.rect.topleft[1]+30, 47, 47)
+        elif self.desenha2:
+            self.rect_colisao_corpo2 = pygame.Rect(self.rect2.topleft[0]+65, self.rect2.topleft[1]+30, 47, 47)
+        elif self.desenha3:
+            self.rect_colisao_corpo3 = pygame.Rect(self.rect3.topleft[0]+65, self.rect3.topleft[1]+30, 55, 55)
 
     def pos_corpo(self, dia):
         return (self.r_corpo  * np.cos(2*np.pi*dia*self.v_corpo),
@@ -87,9 +98,12 @@ class Corpo():
         
         if self.desenha1:
             window.blit(self.pers, self.rect)
+            #pygame.draw.rect(window,(255,250,0),self.rect_colisao_corpo1)
             
         elif self.desenha2:
             window.blit(self.pers2, self.rect2)
+            #pygame.draw.rect(window,(255,250,0),self.rect_colisao_corpo2)
         
         elif self.desenha3:
             window.blit(self.pers3, self.rect3)
+            #pygame.draw.rect(window,(255,250,0),self.rect_colisao_corpo3)
