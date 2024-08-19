@@ -19,6 +19,7 @@ class Game:
         self.cenario = Cenario()
         self.event = None
         self.iman = Iman()
+        self.vidas = 5
         
     def run(self):
        
@@ -28,16 +29,25 @@ class Game:
             self.draw()           
             self.clock.tick(60)
 
+            if self.vidas < 1:
+                self.running = False
+            if (self.dardo.s[0] > 1450) or (self.dardo.s[1] < -300) or \
+                (self.dardo.s[1] > 850) or (self.dardo.s[0] < 100):
+                    self.vidas -= 1
+                    self.dardo = Dardo()
             if self.corpo.desenha1:
                 if self.dardo.rect_colisao.colliderect(self.corpo.rect_colisao_corpo1):
                     self.dardo = Dardo()
                     self.corpo.desenha1 = False
                     self.corpo.desenha2 = True
+                    self.vidas -= 1
+
             elif self.corpo.desenha2:
                 if self.dardo.rect_colisao.colliderect(self.corpo.rect_colisao_corpo2):
                     self.dardo = Dardo()
                     self.corpo.desenha2 = False
                     self.corpo.desenha3 = True
+                    self.vidas -= 1
             elif self.corpo.desenha3:
                 if self.dardo.rect_colisao.colliderect(self.corpo.rect_colisao_corpo3):
                     self.running = False
