@@ -7,3 +7,5 @@ venv/
 env/
 .env
 __pycache__
+pygame_alglin.egg-info
+build/

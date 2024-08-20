@@ -69,7 +69,7 @@ class Game:
         self.corpo.gera_pos()
 
     def draw(self):
-        self.screen.fill((255, 255, 255))
+        self.cenario.fundo(self.screen)
         self.iman.desenha_corpo(self.screen)
         self.dardo.desenha_dardo(self.screen, self.event)
         self.corpo.desenha_corpo(self.screen)

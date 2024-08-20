@@ -16,7 +16,8 @@ class Dardo:
         self.qtd_bolinhas = 50
         self.distancia_final_max = 400
         self.vetor = np.array([0, 0], dtype=np.float64)
-        self.iman = pygame.Rect((500,0), (100, 200))
+        self.iman = pygame.Rect((470,0), (180, 180))
+        self.iman_sprite = pygame.transform.scale(pygame.image.load("pygame_alglin/img/ima.png"), (180,180))
         self.rect_colisao = pygame.Rect(self.s[0], self.s[1], 40, 15)
 
     def normaliza(self, vf, forca):
@@ -98,7 +99,8 @@ class Dardo:
         #         self.rect = self.sprite.get_rect(center=self.rect.center)
         #         print("entrou")
 
-        pygame.draw.rect(window, (255,255,0), self.iman)
+
+        window.blit(self.iman_sprite, self.iman.topleft)
         pos_centralizada = self.s - np.array([self.sprite.get_width() / 2, self.sprite.get_height() / 2])
         window.blit(self.sprite, pos_centralizada)
         if self.arrastando:

@@ -6,6 +6,8 @@ class Iman:
         self.centro = np.array([545,500])
         self.raio = 100
         self.sprite = pygame.transform.scale(pygame.image.load("pygame_alglin/img/iman.png"), (200, 200))
+        self.red_sprite = pygame.transform.scale(pygame.image.load("pygame_alglin/img/redsprite.png"), (2 * self.raio, 2 * self.raio))
+        self.angle = 0
 
     def dist(self,s_obj):
         return np.sqrt((self.centro[0] - s_obj[0])**2 + (self.centro[1]-s_obj[1])**2)
@@ -22,4 +24,11 @@ class Iman:
         return (1/self.dist(s_obj)**2)*v_norm*self.raio*10
     
     def desenha_corpo(self, window):
-        pygame.draw.circle(window, (0, 0, 255), self.centro, self.raio)
+        rotated_sprite = pygame.transform.rotate(self.red_sprite, self.angle)
+
+        self.angle += 6
+
+        top_left = (self.centro[0] - rotated_sprite.get_width() // 2, 
+                    self.centro[1] - rotated_sprite.get_height() // 2)
+
+        window.blit(rotated_sprite, top_left)
