@@ -19,6 +19,7 @@ class Dardo:
         self.iman = pygame.Rect((470,0), (180, 180))
         self.iman_sprite = pygame.transform.scale(pygame.image.load("pygame_alglin/img/ima.png"), (180,180))
         self.rect_colisao = pygame.Rect(self.s[0], self.s[1], 40, 15)
+        self.rect_parede = pygame.Rect(550, 0, 20, 400)
 
     def normaliza(self, vf, forca):
         mod = np.linalg.norm(vf)
@@ -71,13 +72,14 @@ class Dardo:
 
         return pontos
 
-    def atualiza_vetor(self, vet_grav):
+    def atualiza_vetor(self, vet_grav, fase):
 
         if not self.puxando:
-            if self.rect.colliderect(self.iman):
-                self.gravidade = np.array([0, -3])
-            else:
-                self.gravidade = np.array([0, 0.8])
+            if fase == 1:
+                if self.rect.colliderect(self.iman):
+                    self.gravidade = np.array([0, -3])
+                else:
+                    self.gravidade = np.array([0, 0.8])
 
             self.v += self.gravidade + vet_grav
             self.s += 0.1 * self.v
@@ -87,7 +89,7 @@ class Dardo:
             self.sprite = pygame.transform.rotate(self.sprite_original, angulo_rotacao)
             self.rect = self.sprite.get_rect(center=self.rect.center)
     
-    def desenha_dardo(self, window, evento):
+    def desenha_dardo(self, window, evento, fase):
         #pygame.draw.rect(window,(255,250,0),self.rect_colisao)
         # if self.s[0] == 150 and self.s[1] == 550:
         #     if evento.type == pygame.MOUSEBUTTONDOWN:
@@ -100,7 +102,11 @@ class Dardo:
         #         print("entrou")
 
 
-        window.blit(self.iman_sprite, self.iman.topleft)
+        if fase == 1:
+            window.blit(self.iman_sprite, self.iman.topleft)
+        elif fase == 2:
+            pygame.draw.rect(window ,(92,64,51), self.rect_parede)
+
         pos_centralizada = self.s - np.array([self.sprite.get_width() / 2, self.sprite.get_height() / 2])
         window.blit(self.sprite, pos_centralizada)
         if self.arrastando:

@@ -20,6 +20,7 @@ class Game:
         self.event = None
         self.iman = Iman()
         self.vidas = 5
+        self.fase = 1
         
     def run(self):
        
@@ -35,12 +36,17 @@ class Game:
                 (self.dardo.s[1] > 850) or (self.dardo.s[0] < 100):
                     self.vidas -= 1
                     self.dardo = Dardo()
+            if self.fase == 2 and self.dardo.rect_colisao.colliderect(self.dardo.rect_parede):
+                self.vidas -= 1
+                self.dardo = Dardo()
+
             if self.corpo.desenha1:
                 if self.dardo.rect_colisao.colliderect(self.corpo.rect_colisao_corpo1):
                     self.dardo = Dardo()
                     self.corpo.desenha1 = False
                     self.corpo.desenha2 = True
                     self.vidas -= 1
+                    self.fase = 2
 
             elif self.corpo.desenha2:
                 if self.dardo.rect_colisao.colliderect(self.corpo.rect_colisao_corpo2):
@@ -48,6 +54,8 @@ class Game:
                     self.corpo.desenha2 = False
                     self.corpo.desenha3 = True
                     self.vidas -= 1
+                    self.fase = 3
+
             elif self.corpo.desenha3:
                 if self.dardo.rect_colisao.colliderect(self.corpo.rect_colisao_corpo3):
                     self.running = False
@@ -65,13 +73,13 @@ class Game:
         self.corpo.atuliza_coli()
         self.dardo.puxa_dardo(self.event)
         vet_grav = self.iman.atualiza_aceleracao(self.dardo.s)
-        self.dardo.atualiza_vetor(vet_grav)
+        self.dardo.atualiza_vetor(vet_grav, self.fase)
         self.corpo.gera_pos()
 
     def draw(self):
         self.cenario.fundo(self.screen)
         self.iman.desenha_corpo(self.screen)
-        self.dardo.desenha_dardo(self.screen, self.event)
+        self.dardo.desenha_dardo(self.screen, self.event, self.fase)
         self.corpo.desenha_corpo(self.screen)
         pygame.display.update()
 

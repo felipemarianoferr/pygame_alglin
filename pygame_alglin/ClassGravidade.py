@@ -3,7 +3,7 @@ import numpy as np
 
 class Iman:
     def __init__(self):
-        self.centro = np.array([545,500])
+        self.centro = np.array([545,430])
         self.raio = 100
         self.sprite = pygame.transform.scale(pygame.image.load("pygame_alglin/img/iman.png"), (200, 200))
         self.red_sprite = pygame.transform.scale(pygame.image.load("pygame_alglin/img/redsprite.png"), (2 * self.raio, 2 * self.raio))
