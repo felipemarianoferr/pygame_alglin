@@ -1,8 +1,8 @@
 import pygame
-from ClassDardo import *
-from ClassCorpo import *
-from ClassCenario import *
-from ClassGravidade import *
+from pygame_alglin.ClassDardo import *
+from pygame_alglin.ClassCorpo import *
+from pygame_alglin.ClassCenario import *
+from pygame_alglin.ClassGravidade import *
 class Game:
     def __init__(self, width=1200, height=700):
 
