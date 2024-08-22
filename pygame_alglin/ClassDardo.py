@@ -3,7 +3,7 @@ import numpy as np
 
 class Dardo:
     def __init__(self):
-        self.sprite_original = pygame.transform.scale(pygame.image.load("pygame_alglin/img/dardo.png"), (150, 200))
+        self.sprite_original = pygame.transform.scale(pygame.image.load("img/dardo.png"), (150, 200))
         self.sprite = self.sprite_original
         self.s0 = np.array([150, 550], dtype=np.float64)
         self.s = self.s0
@@ -17,7 +17,7 @@ class Dardo:
         self.distancia_final_max = 400
         self.vetor = np.array([0, 0], dtype=np.float64)
         self.iman = pygame.Rect((470,0), (180, 180))
-        self.iman_sprite = pygame.transform.scale(pygame.image.load("pygame_alglin/img/ima.png"), (180,180))
+        self.iman_sprite = pygame.transform.scale(pygame.image.load("img/ima.png"), (180,180))
         self.rect_colisao = pygame.Rect(self.s[0], self.s[1], 40, 15)
         self.rect_parede = pygame.Rect(550, 0, 20, 400)
 

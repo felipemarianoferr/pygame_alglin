@@ -8,13 +8,13 @@ class Corpo():
         self.r_ameba = 100
         self.v_ameba = 1/75
         self.dia_ameba = 0
-        self.pers3 = pygame.transform.scale(pygame.image.load("pygame_alglin/img/a.png"),(175,150))
+        self.pers3 = pygame.transform.scale(pygame.image.load("img/a.png"),(175,150))
         self.rect3 = pygame.Rect(np.array([900,400]), (10, 10))
         self.desenha3 = False
-        self.pers = pygame.transform.scale(pygame.image.load("pygame_alglin/img/a.png"),(175,150))
+        self.pers = pygame.transform.scale(pygame.image.load("img/a.png"),(175,150))
         self.rect = pygame.Rect(np.array([863,167]), (10, 10))
         self.dia = 0
-        self.pers2 = pygame.transform.scale(pygame.image.load("pygame_alglin/img/a.png"),(175,150))
+        self.pers2 = pygame.transform.scale(pygame.image.load("img/a.png"),(175,150))
         self.rect2 = pygame.Rect(np.array([900,70]), (10, 10))
         self.desenha1 = True
         self.desenha2 = False
