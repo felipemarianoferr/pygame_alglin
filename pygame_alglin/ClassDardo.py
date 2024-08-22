@@ -23,7 +23,7 @@ class Dardo:
         self.iman = pygame.Rect((470,0), (180, 180))
         self.iman_sprite = pygame.transform.scale(pygame.image.load(ima_path), (180,180))
         self.rect_colisao = pygame.Rect(self.s[0], self.s[1], 40, 15)
-        self.rect_parede = pygame.Rect(550, 0, 20, 400)
+        self.rect_parede = pygame.Rect(525, 0, 65, 325)
 
     def normaliza(self, vf, forca):
         mod = np.linalg.norm(vf)
