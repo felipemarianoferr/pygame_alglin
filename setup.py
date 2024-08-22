@@ -7,6 +7,16 @@ setup(
     install_requires=[  # Dependências
         # Liste aqui outras bibliotecas que seu pacote precisa
     ],
+    package_data={
+        '': ['pygame_alglin\img\a.png',
+             'pygame_alglin\img\dardo.png',
+             'pygame_alglin\img\ima.png',
+             'pygame_alglin\img\iman.png',
+             'pygame_alglin\img\parqu.png',
+             'pygame_alglin\img\red.png',
+             'pygame_alglin\img\redsprite.png'
+             ]     # Inclui todos os arquivos .png dentro do diretório 'img' de todos os pacotes
+    },
     entry_points={
         "console_scripts": [
             "pygame_alglin=pygame_alglin.main:main",  # Se quiser criar um comando de terminal
