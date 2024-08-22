@@ -4,7 +4,7 @@ import os
 class Corpo():
     def __init__(self):
         base_path = os.path.dirname(os.path.abspath(__file__))
-        balao_path = os.path.join(base_path, 'pygame_alglin', 'img', 'a.png')
+        balao_path = os.path.join(base_path, 'img', 'a.png')
 
         self.r_corpo = 80
         self.v_corpo = 1/75

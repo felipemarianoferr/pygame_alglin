@@ -4,8 +4,8 @@ import os
 class Iman:
     def __init__(self):
         base_path = os.path.dirname(os.path.abspath(__file__))
-        iman_path = os.path.join(base_path, 'pygame_alglin', 'img', 'iman.png')
-        red_path = os.path.join(base_path, 'pygame_alglin', 'img', 'redsprite.png')
+        iman_path = os.path.join(base_path, 'img', 'iman.png')
+        red_path = os.path.join(base_path, 'img', 'redsprite.png')
         self.centro = np.array([545,430])
         self.raio = 100
         self.sprite = pygame.transform.scale(pygame.image.load(iman_path), (200, 200))

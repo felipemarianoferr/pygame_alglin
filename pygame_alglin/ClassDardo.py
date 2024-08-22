@@ -4,8 +4,8 @@ import os
 class Dardo:
     def __init__(self):
         base_path = os.path.dirname(os.path.abspath(__file__))
-        dardo_path = os.path.join(base_path, 'pygame_alglin', 'img', 'dardo.png')
-        ima_path = os.path.join(base_path, 'pygame_alglin', 'img', 'ima.png')
+        dardo_path = os.path.join(base_path, 'img', 'dardo.png')
+        ima_path = os.path.join(base_path, 'img', 'ima.png')
 
         self.sprite_original = pygame.transform.scale(pygame.image.load(dardo_path), (150, 200))
         self.sprite = self.sprite_original
