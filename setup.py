@@ -9,15 +9,15 @@ setup(
     ],
     entry_points={
         "console_scripts": [
-            "meu-comando=meu_pacote.modulo:main",  # Se quiser criar um comando de terminal
+            "pygame_alglin=pygame_alglin.main:main",  # Se quiser criar um comando de terminal
         ],
     },
-    author="Seu Nome",  # Seu nome
-    author_email="seu.email@example.com",  # Seu email
-    description="Uma breve descrição do pacote",
+    author="Felipe e Vinicius",  # Seu nome
+    author_email="felipemf2@al.insper.edu.br e vinileal2005@gmail.com",  # Seu email
+    description="Em um jogo desafiador de física, o jogador deve lançar um dardo para acertar um balão em um cenário que contém tanto um campo gravitacional quanto um campo magnético. Cada lançamento requer estratégia e precisão, já que os campos afetam a trajetória do dardo de maneiras distintas, tornando cada nível único e progressivamente mais difícil. O objetivo é acertar o balão com o menor número de tentativas possível, superando as forças naturais que desviam o curso do dardo.",
     long_description=open("README.md").read(),  # Descrição longa (usualmente do README)
     long_description_content_type="text/markdown",
-    url="https://github.com/seu_usuario/meu_pacote",  # URL do seu repositório
+    url="https://github.com/felipemarianoferr/pygame_alglin.git",  # URL do seu repositório
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",

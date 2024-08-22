@@ -87,7 +87,7 @@ class Game:
         pygame.quit()
 
 
-if __name__ == "__main__":
+def main():
     game = Game()
     try:
         game.run()
@@ -95,3 +95,6 @@ if __name__ == "__main__":
         print(f"Ocorreu um erro: {e}")
     finally:
         game.quit()
+
+if __name__ == "__main__":
+    main()
