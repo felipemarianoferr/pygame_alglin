@@ -1,12 +1,15 @@
 import pygame
 import numpy as np
-
+import os
 class Iman:
     def __init__(self):
+        base_path = os.path.dirname(os.path.abspath(__file__))
+        iman_path = os.path.join(base_path, 'pygame_alglin', 'img', 'iman.png')
+        red_path = os.path.join(base_path, 'pygame_alglin', 'img', 'redsprite.png')
         self.centro = np.array([545,430])
         self.raio = 100
-        self.sprite = pygame.transform.scale(pygame.image.load("img/iman.png"), (200, 200))
-        self.red_sprite = pygame.transform.scale(pygame.image.load("img/redsprite.png"), (2 * self.raio, 2 * self.raio))
+        self.sprite = pygame.transform.scale(pygame.image.load(iman_path), (200, 200))
+        self.red_sprite = pygame.transform.scale(pygame.image.load(red_path), (2 * self.raio, 2 * self.raio))
         self.angle = 0
 
     def dist(self,s_obj):

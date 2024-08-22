@@ -1,20 +1,23 @@
 import pygame
 import numpy as np
-
+import os
 class Corpo():
     def __init__(self):
+        base_path = os.path.dirname(os.path.abspath(__file__))
+        balao_path = os.path.join(base_path, 'pygame_alglin', 'img', 'a.png')
+
         self.r_corpo = 80
         self.v_corpo = 1/75
         self.r_ameba = 100
         self.v_ameba = 1/75
         self.dia_ameba = 0
-        self.pers3 = pygame.transform.scale(pygame.image.load("img/a.png"),(175,150))
+        self.pers3 = pygame.transform.scale(pygame.image.load(balao_path),(175,150))
         self.rect3 = pygame.Rect(np.array([900,400]), (10, 10))
         self.desenha3 = False
-        self.pers = pygame.transform.scale(pygame.image.load("img/a.png"),(175,150))
+        self.pers = pygame.transform.scale(pygame.image.load(balao_path),(175,150))
         self.rect = pygame.Rect(np.array([863,167]), (10, 10))
         self.dia = 0
-        self.pers2 = pygame.transform.scale(pygame.image.load("img/a.png"),(175,150))
+        self.pers2 = pygame.transform.scale(pygame.image.load(balao_path),(175,150))
         self.rect2 = pygame.Rect(np.array([900,70]), (10, 10))
         self.desenha1 = True
         self.desenha2 = False
