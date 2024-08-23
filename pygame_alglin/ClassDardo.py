@@ -6,9 +6,11 @@ class Dardo:
         base_path = os.path.dirname(os.path.abspath(__file__))
         dardo_path = os.path.join(base_path, 'img', 'dardo.png')
         ima_path = os.path.join(base_path, 'img', 'ima.png')
+        madeira_path = os.path.join(base_path, 'img', 'madeira.png')
 
         self.sprite_original = pygame.transform.scale(pygame.image.load(dardo_path), (150, 200))
         self.sprite = self.sprite_original
+        self.vidas = pygame.transform.scale(pygame.image.load(dardo_path), (75, 100))
         self.s0 = np.array([150, 550], dtype=np.float64)
         self.s = self.s0
         self.v = np.array([0, 0], dtype=np.float64)
@@ -20,10 +22,11 @@ class Dardo:
         self.qtd_bolinhas = 50
         self.distancia_final_max = 400
         self.vetor = np.array([0, 0], dtype=np.float64)
-        self.iman = pygame.Rect((470,0), (180, 180))
+        self.iman = pygame.Rect((470,0), (180, 540))
         self.iman_sprite = pygame.transform.scale(pygame.image.load(ima_path), (180,180))
         self.rect_colisao = pygame.Rect(self.s[0], self.s[1], 40, 15)
-        self.rect_parede = pygame.Rect(525, 0, 65, 325)
+        self.rect_parede = pygame.Rect(525, 0, 65, 326)
+        self.parede = pygame.transform.scale(pygame.image.load(madeira_path), (65, 82))
 
     def normaliza(self, vf, forca):
         mod = np.linalg.norm(vf)
@@ -76,11 +79,10 @@ class Dardo:
 
         return pontos
 
-    def atualiza_vetor(self, vet_grav, fase):
-
+    def atualiza_vetor(self,vet_grav, fase):
         if not self.puxando:
             if fase == 1:
-                if self.rect.colliderect(self.iman):
+                if self.rect_colisao.colliderect(self.iman):
                     self.gravidade = np.array([0, -3])
                 else:
                     self.gravidade = np.array([0, 0.8])
@@ -93,24 +95,17 @@ class Dardo:
             self.sprite = pygame.transform.rotate(self.sprite_original, angulo_rotacao)
             self.rect = self.sprite.get_rect(center=self.rect.center)
     
-    def desenha_dardo(self, window, evento, fase):
-        #pygame.draw.rect(window,(255,250,0),self.rect_colisao)
-        # if self.s[0] == 150 and self.s[1] == 550:
-        #     if evento.type == pygame.MOUSEBUTTONDOWN:
-        #         vet_mouse = pygame.mouse.get_pos()
-        #         vet_mouse = np.array([vet_mouse[0], vet_mouse[1]])
-
-        #         angulo_inicial = self.angulo(vet_mouse)
-        #         self.sprite = pygame.transform.rotate(self.sprite_original, angulo_inicial)
-        #         self.rect = self.sprite.get_rect(center=self.rect.center)
-        #         print("entrou")
-
-
+    def desenha_dardo(self, window, evento, fase, vidas):
+        for i in range(vidas):
+            dardo_rotacionado = pygame.transform.rotate(self.vidas, 90)
+            window.blit(dardo_rotacionado, (40 + 60 * (i-1), 10))
         if fase == 1:
             window.blit(self.iman_sprite, self.iman.topleft)
         elif fase == 2:
-            pygame.draw.rect(window ,(92,64,51), self.rect_parede)
-
+            window.blit(self.parede, self.rect_parede.topleft)
+            window.blit(self.parede, self.rect_parede.move(0, 82).topleft)
+            window.blit(self.parede, self.rect_parede.move(0, 164).topleft)
+            window.blit(self.parede, self.rect_parede.move(0, 246).topleft)
         pos_centralizada = self.s - np.array([self.sprite.get_width() / 2, self.sprite.get_height() / 2])
         window.blit(self.sprite, pos_centralizada)
         if self.arrastando:
@@ -119,6 +114,7 @@ class Dardo:
             for ponto in pontos:
                 pygame.draw.circle(window, (150, 150, 150), ponto.astype(int), bolas_tamanho)
                 bolas_tamanho *= 0.95
+
 
     def puxa_dardo(self, evento):
         bola_pos = self.s
