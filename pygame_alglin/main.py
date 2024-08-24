@@ -48,14 +48,14 @@ class Game:
                     self.dardo = Dardo()
                     self.corpo.desenha1 = False
                     self.corpo.desenha2 = True
-                    self.vidas -= 1
+                    #self.vidas -= 1
                     self.fase = 2
             elif self.corpo.desenha2:
                 if self.dardo.rect_colisao.colliderect(self.corpo.rect_colisao_corpo2):
                     self.dardo = Dardo()
                     self.corpo.desenha2 = False
                     self.corpo.desenha3 = True
-                    self.vidas -= 1
+                    #self.vidas -= 1
                     self.fase = 3
             elif self.corpo.desenha3:
                 if self.dardo.rect_colisao.colliderect(self.corpo.rect_colisao_corpo3):
